@@ -4,5 +4,6 @@ public class Zelle {
 	public Zelle() {
 		// TODO Auto-generated constructor stub
 		this.classOk = true;
+		
 	}
 }

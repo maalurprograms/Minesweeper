@@ -6,7 +6,7 @@ public class Test {
 		Zelle zelle = new Zelle();
 		Spielfeld spielfeld = new Spielfeld();
 		if (zelle.classOk && spielfeld.classOk) {
-			System.out.println("OK");
+			System.out.println("Du bist ein DAUdu");
 		} else {
 			System.out.println(zelle.classOk + " " + spielfeld.classOk);
 		}
