@@ -7,6 +7,8 @@ public class Test {
 		Spielfeld spielfeld = new Spielfeld();
 		if (zelle.classOk && spielfeld.classOK) {
 			System.out.println("OK");
+		} else {
+			System.out.println(zelle.classOk + " " + spielfeld.classOk);
 		}
 	}
 }
