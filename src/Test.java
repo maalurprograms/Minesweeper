@@ -3,8 +3,10 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		if(new Zelle() && new Spielfeld()){
-			System.out.println("OK");		
+		Zelle zelle = new Zelle();
+		Spielfeld spielfeld = new Spielfeld();
+		if (zelle.classOk && spielfeld.classOK) {
+			System.out.println("OK");
 		}
 	}
 }

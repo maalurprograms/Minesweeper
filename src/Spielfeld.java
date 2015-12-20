@@ -1,7 +1,8 @@
 
 public class Spielfeld {
+	public boolean classOK;
 	public Spielfeld() {
 		// TODO Auto-generated constructor stub
-		System.out.println("Spielfeld: OK");
+		this.classOK = true;
 	}
 }

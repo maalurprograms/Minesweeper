@@ -1,7 +1,8 @@
 
 public class Zelle {
+	public boolean classOk;
 	public Zelle() {
 		// TODO Auto-generated constructor stub
-		System.out.println("Zelle: OK");
+		this.classOk = true;
 	}
 }
