@@ -1,33 +1,42 @@
 import java.awt.GridLayout;
 import java.util.Random;
-
 import javax.swing.JFrame;
 
 public class Field {
 	private int[] bombs = new int[10];
-	private Cell[][] cells = new Cell[8][8];
+	public final Cell[][] cells = new Cell[8][8];
 	public final JFrame frame = new JFrame();
 	
 	public Field() {
 		frame.setSize(500,500);
-		GridLayout layout = new GridLayout(8,8);
-		frame.setLayout(layout);;
+		frame.setLayout(new GridLayout(8,8));;
 		
 		generateBombs(this.bombs);
 		generateCells(this.cells, this.bombs, frame);
+		setBombInRange();
 		
 		frame.setResizable(false);
 		frame.setVisible(true);
-		
-		setBombInRange();
 	}
 	
 	private void setBombInRange(){
-		int[][] range = new int[8][2];
+		int bombsInRange = 0;
+		int[][] range = new int[][] {{-1, 1}, {0, 1},{1, 1},{-1, 0},{1, -1},{-1, -1},{0, -1},{1, 0}};
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
-				for (int i = 0; i < range.length; i++) {
-					
+				if (!cells[x][y].bomb) {
+					for (int i = 0; i < range.length; i++) {
+						try {
+							if (cells[x + range[i][0]][y + range[i][1]].bomb) {
+								bombsInRange += 1;
+							}
+						} catch (Exception e) {
+							// TODO: handle exception
+							continue;
+						}
+					}
+					cells[x][y].bombsInRange = bombsInRange;
+					bombsInRange = 0;
 				}
 			}
 		}
@@ -57,9 +66,10 @@ public class Field {
 	
 	private void generateCells(Cell[][] cells, int[] bombs, JFrame frame){
 		int cellID = 1;
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
-				boolean isBomb = checkCell(cellID);
+		boolean isBomb;
+		for (int x = 0; x < cells.length; x++) {
+			for (int y = 0; y < cells.length; y++) {
+				isBomb = checkCell(cellID);
 				if (isBomb) {
 					cells[x][y] = new Cell(cellID, true, frame);
 				} else {
@@ -75,6 +85,7 @@ public class Field {
 		for (int i = 0; i < bombs.length; i++) {
 			if (cellID == bombs[i]) {
 				isBomb = true;
+				break;
 			} else {
 				isBomb = false;
 			}

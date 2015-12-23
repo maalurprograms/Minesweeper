@@ -1,8 +1,5 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,69 +16,37 @@ public class Cell {
 		this.cellID = cellID;
 		this.bomb = bomb;
 		button.setFont(new Font("Arial", Font.PLAIN, 40));
-		button.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
-		        int modifiers = mouseEvent.getModifiers();
-		        if ((modifiers & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
-		        	reveal();
-		        }
-		        if ((modifiers & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
-		        	mark();
-		        }
-			}
-		});
 		layout.add(button);  
 	}
 	
-	public void mark() {
-		if (!revealed) {
-			if (marked) {
-				marked = false;
-				button.setBackground(new JButton().getBackground());
-			} else {
-				marked = true;
-				button.setBackground(Color.RED);
-			}
-		}
-	}
-	
-	public void reveal() {
-		if (!revealed) {
-			revealed = true;
-			button.setBackground(Color.WHITE);
-			button.setText(String.valueOf(bombsInRange));
-			setFontColor();
-		}
-	}
-	
-	private void setFontColor(){
+	public void setFontColor(){
 		switch (bombsInRange) {
 		case 0:
-			
+			button.setForeground(Color.decode("#00cc00"));
 			break;
 		case 1:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#00cc66"));
 			break;
 		case 2:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#00cccc"));
 			break;
 		case 3:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#0066cc"));
 			break;
 		case 4:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#0000cc"));
 			break;
 		case 5:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#6600cc"));
 			break;
 		case 6:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#cc00cc"));
 			break;
 		case 7:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#cc0066"));
 			break;
 		case 8:
-			button.setForeground(Color.RED);
+			button.setForeground(Color.decode("#cc0000"));
 			break;
 		}
 	}
