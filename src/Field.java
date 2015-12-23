@@ -1,17 +1,16 @@
 import java.util.Random;
 
 public class Field {
-	private int[] bombs;
-	private Cell[][] cells;
+	private int[] bombs = new int[10];
+	private Cell[][] cells = new Cell[8][8];
 	
 	public Field() {
-		this.bombs = generateBombs();
-		this.cells = generateCells();
+		generateBombs(this.bombs);
+		generateCells(this.cells, this.bombs);
 	}
 	
-	private static int[] generateBombs(){
+	private void generateBombs(int[] bombs){
 		Random random = new Random();
-		int[] bombs = new int[10];
 		int randInt;
 		int[] alreadyUsed = new int[10];
 		boolean isUsed = false;
@@ -30,18 +29,32 @@ public class Field {
 				isUsed = false;
 			}
 		}
-		return bombs;
 	}
 	
-	private static Cell[][] generateCells(){
+	private void generateCells(Cell[][] cells, int[] bombs){
 		int cellID = 1;
-		Cell[][] cells = new Cell[8][8];
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				cells[x][y] = new Cell(cellID);
+				boolean isBomb = checkCell(cellID);
+				if (isBomb) {
+					cells[x][y] = new Cell(cellID, true);
+				} else {
+					cells[x][y] = new Cell(cellID, false);
+				}
 				cellID += 1;
 			}
 		}
-		return cells;
+	}
+	
+	private boolean checkCell(int cellID){
+		boolean isBomb = false;
+		for (int i = 0; i < bombs.length; i++) {
+			if (cellID == bombs[i]) {
+				isBomb = true;
+			} else {
+				isBomb = false;
+			}
+		}
+		return isBomb;
 	}
 }
