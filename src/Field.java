@@ -3,9 +3,10 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 public class Field {
-	private int[] bombs = new int[10];
+	public final int[] bombs = new int[10];
 	public final Cell[][] cells = new Cell[8][8];
 	public final JFrame frame = new JFrame();
+	public int countRevealedCells = 0;
 	
 	public Field() {
 		frame.setSize(500,500);
