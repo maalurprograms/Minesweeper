@@ -16,7 +16,7 @@ public class Game {
 		}		
 	}
 	
-	public static void setMouseListener(Cell cell, Field field) {
+	public static void setMouseListener(final Cell cell, final Field field) {
 		cell.button.addMouseListener (new MouseAdapter(){
 		    public void mouseClicked(MouseEvent mouseEvent){
 		    	int modifiers = mouseEvent.getModifiers();
@@ -56,10 +56,10 @@ public class Game {
 				field.countRevealedCells += 1;
 				cell.setFontColor();
 				if (field.countRevealedCells == ((cells.length * cells.length) - field.bombs.length)) {
-					win(cells);
+					end(cells, true);
 				}
 			} else {
-				lose(cells);
+				end(cells, false);
 			}
 		}
 	}
@@ -88,30 +88,17 @@ public class Game {
 		}
 	}
 	
-	public static void win(Cell[][] cells) {
+	public static void end(Cell[][] cells, boolean win) {
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells.length; y++) {
 				try {
 					if (cells[x][y].bomb) {
-						cells[x][y].button.setBackground(Color.GREEN);
-						cells[x][y].button.setText("X");
-					} else {
-						cells[x][y].button.setBackground(Color.WHITE);
-						cells[x][y].button.setText(null);
-					}
-				} catch (Exception e) {
-					
-				}
-			}
-		}
-	}
-	
-	public static void lose(Cell[][] cells) {
-		for (int x = 0; x < cells.length; x++) {
-			for (int y = 0; y < cells.length; y++) {
-				try {
-					if (cells[x][y].bomb) {
-						cells[x][y].button.setBackground(Color.RED);
+						if (win) {
+							cells[x][y].button.setBackground(Color.GREEN);
+						} else {
+							cells[x][y].button.setBackground(Color.RED);
+						}
+
 					} else {
 						cells[x][y].button.setBackground(Color.WHITE);
 						cells[x][y].button.setText(null);
