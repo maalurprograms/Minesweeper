@@ -16,7 +16,7 @@ public class Game {
 		}		
 	}
 	
-	public static void setMouseListener(final Cell cell, final Field field) {
+	private static void setMouseListener(final Cell cell, final Field field) {
 		cell.button.addMouseListener (new MouseAdapter(){
 		    public void mouseClicked(MouseEvent mouseEvent){
 		    	int modifiers = mouseEvent.getModifiers();
@@ -30,7 +30,7 @@ public class Game {
 		});
 	}
 	
-	public static void mark(Cell cell) {
+	private static void mark(Cell cell) {
 		if (!cell.revealed) {
 			if (cell.marked) {
 				cell.marked = false;
@@ -42,7 +42,7 @@ public class Game {
 		}
 	}
 	
-	public static void reveal(Cell cell, Field field) {
+	private static void reveal(Cell cell, Field field) {
 		Cell[][] cells = field.cells;
 		if (!cell.revealed) {
 			cell.revealed = true;
@@ -64,7 +64,7 @@ public class Game {
 		}
 	}
 	
-	public static void revealAllZero(Field field, Cell cell) {
+	private static void revealAllZero(Field field, Cell cell) {
 		Cell[][] cells = field.cells;
 		int[][] range = new int[][] {{-1, 1}, {0, 1},{1, 1},{-1, 0},{1, -1},{-1, -1},{0, -1},{1, 0}};
 		Cell cellInRange;
@@ -88,7 +88,7 @@ public class Game {
 		}
 	}
 	
-	public static void end(Cell[][] cells, boolean win) {
+	private static void end(Cell[][] cells, boolean win) {
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells.length; y++) {
 				try {
