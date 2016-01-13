@@ -3,6 +3,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Game {
@@ -112,6 +114,7 @@ public class Game {
 				try {
 					if (cells[x][y].bomb) {
 						cells[x][y].button.setBackground(Color.RED);
+						cells[x][y].button.setText("X");
 					} else {
 						cells[x][y].button.setBackground(Color.WHITE);
 						cells[x][y].button.setText(null);
