@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.9" icons="true">  
+  <object id="1" language="java" name="Cell" project="Minesweeper" file="/Minesweeper/src/Cell.java" binary="false" 
+    label="cell" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="142" y="0"/>  
+  </object>  
+  <object id="2" language="java" name="Field" project="Minesweeper" file="/Minesweeper/src/Field.java" binary="false" 
+    label="field" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="252" y="0"/>  
+  </object>  
+  <object id="3" language="java" name="Game" project="Minesweeper" file="/Minesweeper/src/Game.java" binary="false" 
+    label="game" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="430" y="0"/>  
+  </object>
+</sequence-diagram>
