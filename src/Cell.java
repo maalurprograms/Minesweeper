@@ -4,6 +4,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+/**
+	Die Klasse Cell verwalted den Zustand der Zelle
+*/
+
 public class Cell {
 	public final int cellID;
 	public final boolean bomb;
