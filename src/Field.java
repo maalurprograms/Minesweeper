@@ -2,12 +2,37 @@ import java.awt.GridLayout;
 import java.util.Random;
 import javax.swing.JFrame;
 
+/**
+ * Diese Klasse generiert die Zellen und Bomben.
+ * @author Jonas Cosandey
+ */
 public class Field {
-	public final int[] bombs = new int[10];
-	public final Cell[][] cells = new Cell[8][8];
-	public final JFrame frame = new JFrame();
-	public int countRevealedCells = 0;
 	
+	/**
+	 * Array für die Bomben. Werte werden mit der Methode generateBombs hinzugefügt.
+	 */
+	public final int[] bombs = new int[10];
+	
+	/**
+	 * Zwei dimensionales Array für die Zellen. Diese werden später in der Methode generateCells hinzugefügt.
+	 * @see Cell
+	 */
+	public final Cell[][] cells = new Cell[8][8];
+	
+	/**
+	 * JFrame Objekt dem die Buttons der Zellen zugeordnet werden.
+	 * @see JFrame
+	 */
+	public final JFrame frame = new JFrame();
+	
+	/**
+	 * Konfiguriert das JFrame Objekt und ruft die Methoden zum generieren der Zellen (generateCells) 
+	 * sowie der Bomben (gegerateBombs) auf. Ruft ausserdem die Methode setBombInRange auf um für jede Zelle 
+	 * die anzahl Bomben in der Umgebung zu bestimmen.
+	 * 
+	 * @see Cell
+	 * @see JFrame
+	 */
 	public Field() {
 		frame.setSize(500,500);
 		frame.setLayout(new GridLayout(8,8));;
@@ -36,7 +61,7 @@ public class Field {
 							continue;
 						}
 					}
-					cells[x][y].bombsInRange = bombsInRange;
+					cells[x][y].bombsInRange(bombsInRange);
 					bombsInRange = 0;
 				}
 			}
@@ -47,21 +72,21 @@ public class Field {
 		Random random = new Random();
 		int randInt;
 		int[] alreadyUsed = new int[10];
-		boolean isUsed = false;
+		boolean isUsed;
 		
 		for (int i = 0; i < bombs.length; i++) {
-			randInt = random.nextInt(65);
-			for (int j = 0; j < alreadyUsed.length; j++) {
-				if (randInt == alreadyUsed[j]) {
-					isUsed = true;
-				}
-			}
-			if (!isUsed) {
-				bombs[i] = randInt;
-			} else {
-				i -= 1;
+			do {
 				isUsed = false;
-			}
+				randInt = random.nextInt(65);
+				for (int j = 0; j < alreadyUsed.length; j++) {
+					if (randInt == alreadyUsed[j]) {
+						isUsed = true;
+					}
+				}
+			} while (isUsed);
+
+			System.out.println(randInt);
+			bombs[i] = randInt;
 		}
 	}
 	

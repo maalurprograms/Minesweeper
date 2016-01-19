@@ -3,22 +3,48 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
-
+/**
+ * Zuständig für den Start des Spiels und die interkation mit User.
+ * @author Jonas Cosandey
+ */
 public class Game {
 	
-	static final Field field = new Field();
-	static final Cell[][] cells = field.cells;
+	/**
+	 * Feld Objekt das im Konstruktor nun alle Zellen generiert hat und das Spielfeld vorbereitet hat.
+	 * @see Field
+	 */
+	private Field field = new Field();
 	
+	/**
+	 * Zwei dimensionales Array das in der Klasse Field generiert wurde.
+	 * @see Field
+	 * @see Cell
+	 */
+	private Cell[][] cells = field.cells;
+	
+	/**
+	 * Anzahl bereits aufgedeckter Zellen damit bestimmt werden kann, wann der Spieler alle Zellen (Ohne Bomben) aufgedeckt hat.
+	 */
+	private int countRevealedCells = 0;
+	
+	/**
+	 * Für jede Zelle wird die Methode setNouseListener aufgerufen,
+	 * die ein MouseListener für die Linke Und Rechte taste sezt.
+	 * @param args
+	 * @see MouseAdapter
+	 * @see MouseEvent
+	 * @see InputEvent
+	 */
 	public static void main(String[] args) {
-		for (int x = 0; x < cells.length; x++) {
-			for (int y = 0; y < cells.length; y++) {
-				setMouseListener(cells[x][y]);
+		Game game = new Game(); 
+		for (int x = 0; x < game.cells.length; x++) {
+			for (int y = 0; y < game.cells.length; y++) {
+				game.setMouseListener(game.cells[x][y]);
 			}
 		}		
 	}
 	
-	private static void setMouseListener(final Cell cell) {
+	private void setMouseListener(final Cell cell) {
 		cell.button.addMouseListener (new MouseAdapter(){
 		    public void mouseClicked(MouseEvent mouseEvent){
 		    	int modifiers = mouseEvent.getModifiers();
@@ -26,37 +52,25 @@ public class Game {
 		        	reveal(cell);
 		        }
 		        if ((modifiers & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
-		        	mark(cell);
+		        	cell.mark();
 		        }
 		    }
 		});
 	}
 	
-	private static void mark(Cell cell) {
-		if (!cell.revealed) {
-			if (cell.marked) {
-				cell.marked = false;
-				cell.button.setBackground(new JButton().getBackground());
-			} else {
-				cell.marked = true;
-				cell.button.setBackground(Color.RED);
-			}
-		}
-	}
-	
-	private static void reveal(Cell cell) {
-		if (!cell.revealed) {
-			cell.revealed = true;
+	private void reveal(Cell cell) {
+		if (!cell.reveal(true)) {
+			cell.reveal(false);
 			cell.button.setBackground(Color.WHITE);
 			if (!cell.bomb) {
-				if (cell.bombsInRange == 0) {
+				if (cell.bombsInRange(null) == 0) {
 					revealAllZero(cell);
 				} else {
-					cell.button.setText(String.valueOf(cell.bombsInRange));
+					cell.button.setText(String.valueOf(cell.bombsInRange(null)));
 				}
-				field.countRevealedCells += 1;
+				countRevealedCells += 1;
 				cell.setFontColor();
-				if (field.countRevealedCells == ((cells.length * cells.length) - field.bombs.length)) {
+				if (countRevealedCells == ((cells.length * cells.length) - field.bombs.length)) {
 					end(true);
 				}
 			} else {
@@ -65,7 +79,7 @@ public class Game {
 		}
 	}
 	
-	private static void revealAllZero(Cell cell) {
+	private void revealAllZero(Cell cell) {
 		int[][] range = new int[][] {{-1, 1}, {0, 1},{1, 1},{-1, 0},{1, -1},{-1, -1},{0, -1},{1, 0}};
 		Cell cellInRange;
 		for (int x = 0; x < cells.length; x++) {
@@ -74,7 +88,7 @@ public class Game {
 					for (int i = 0; i < range.length; i++) {
 						try {
 							cellInRange = cells[x + range[i][0]][y + range[i][1]];
-							if (cellInRange.bombsInRange == 0) {
+							if (cellInRange.bombsInRange(null) == 0) {
 								reveal(cellInRange);
 							} else if (cellInRange.bomb == false) {
 								reveal(cellInRange);
@@ -88,7 +102,7 @@ public class Game {
 		}
 	}
 	
-	private static void end(boolean win) {
+	private void end(boolean win) {
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells.length; y++) {
 				try {
@@ -104,7 +118,7 @@ public class Game {
 						cells[x][y].button.setText(null);
 					}
 				} catch (Exception e) {
-					
+					continue;
 				}
 			}
 		}
