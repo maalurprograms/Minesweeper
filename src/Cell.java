@@ -23,7 +23,7 @@ public class Cell {
 	public final boolean bomb;
 	
 	/**
-	 * Button der dann Ã¼ber die Klasse Game kontrolliert wird.
+	 * Button der dann über die Klasse Game kontrolliert wird.
 	 * @see Game
 	 */
 	public final JButton button = new JButton();
@@ -32,9 +32,9 @@ public class Cell {
 	private int bombsInRange;
 	
 	/**
-	 * Es werden die Schriftart, Schriftstil und SchriftgrÃ¶sse fÃ¼r den Button festgelegt
-	 * und dieser dann zum JFrame element hinzugefÃ¼gt.
-	 * Ausserdem werden die Werte der Klassenvariabeln CellID und bomb von ihren gleichnamigen Parametern Ã¼berschrieben.
+	 * Es werden die Schriftart, Schriftstil und Schriftgrösse für den Button festgelegt
+	 * und dieser dann zum JFrame element hinzugefügt.
+	 * Ausserdem werden die Werte der Klassenvariabeln CellID und bomb von ihren gleichnamigen Parametern überschrieben.
 	 * @param cellID
 	 * @param bomb 
 	 * @param layout 
@@ -48,10 +48,10 @@ public class Cell {
 	}
 	
 	/**
-	 * Diese Methode gibt die Klassen Variabel bombsInRange zurÃ¼ck und falls als Parameter eine Zahl Ã¼bergeben wird, 
+	 * Diese Methode gibt die Klassen Variabel bombsInRange zurück und falls als Parameter eine Zahl übergeben wird, 
 	 * wird der Klassen Variabel bombsInRange diesen Wert gegeben.
 	 * @param bombsInRange
-	 * @return Gibt die Klassen Variabel bombsInRange zurÃ¼ck.
+	 * @return Gibt die Klassen Variabel bombsInRange zurück.
 	 * @see Integer
 	 */
 	public int bombsInRange(Integer bombsInRange){
@@ -63,8 +63,8 @@ public class Cell {
 	
 	/**
 	 * Wenn getInfo auf True gesetzt ist, wird die Klassen Variabel revealed auf True gesetzt.
-	 * @param getInfo Wenn True wird nur der Wert von revealed zurÃ¼ckgegeben. Bei False wird revealed auf True gesetzt.
-	 * @return Gibt die Klassen Variabel revealed zurÃ¼ck.
+	 * @param getInfo Wenn True wird nur der Wert von revealed zurückgegeben. Bei False wird revealed auf True gesetzt.
+	 * @return Gibt die Klassen Variabel revealed zurück.
 	 */
 	public boolean reveal(boolean getInfo){
 		if (!getInfo) {
@@ -92,7 +92,7 @@ public class Cell {
 	}
 	
 	/**
-	 * Die Schriftfarbe des Buttons wird je nach anzahl Bomben in der nÃ¤he gefÃ¤rbt.
+	 * Die Schriftfarbe des Buttons wird je nach anzahl Bomben in der nähe gefärbt.
 	 * @see JButton
 	 */
 	public void setFontColor(){

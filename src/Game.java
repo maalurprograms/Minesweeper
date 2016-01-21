@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * ZustÃ¤ndig fÃ¼r den Start des Spiels und die interkation mit User.
+ * Zuständig für den Start des Spiels und die interkation mit User.
  * @author Jonas Cosandey
  */
 public class Game {
@@ -28,8 +28,8 @@ public class Game {
 	private int countRevealedCells = 0;
 	
 	/**
-	 * FÃ¼r jede Zelle wird die Methode setNouseListener aufgerufen,
-	 * die ein MouseListener fÃ¼r die Linke Und Rechte taste sezt.
+	 * Für jede Zelle wird die Methode setNouseListener aufgerufen,
+	 * die ein MouseListener für die Linke Und Rechte taste sezt.
 	 * @param args
 	 * @see MouseAdapter
 	 * @see MouseEvent

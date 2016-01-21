@@ -9,12 +9,12 @@ import javax.swing.JFrame;
 public class Field {
 	
 	/**
-	 * Array fÃ¼r die Bomben. Werte werden mit der Methode generateBombs hinzugefÃ¼gt.
+	 * Array für die Bomben. Werte werden mit der Methode generateBombs hinzugefügt.
 	 */
 	public final int[] bombs = new int[10];
 	
 	/**
-	 * Zwei dimensionales Array fÃ¼r die Zellen. Diese werden spÃ¤ter in der Methode generateCells hinzugefÃ¼gt.
+	 * Zwei dimensionales Array für die Zellen. Diese werden später in der Methode generateCells hinzugefügt.
 	 * @see Cell
 	 */
 	public final Cell[][] cells = new Cell[8][8];
@@ -27,7 +27,7 @@ public class Field {
 	
 	/**
 	 * Konfiguriert das JFrame Objekt und ruft die Methoden zum generieren der Zellen (generateCells) 
-	 * sowie der Bomben (gegerateBombs) auf. Ruft ausserdem die Methode setBombInRange auf um fÃ¼r jede Zelle 
+	 * sowie der Bomben (gegerateBombs) auf. Ruft ausserdem die Methode setBombInRange auf um für jede Zelle 
 	 * die anzahl Bomben in der Umgebung zu bestimmen.
 	 * 
 	 * @see Cell
